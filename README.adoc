@@ -1,0 +1,105 @@
+# CMakeSeries
+Cross platform C++ Development using CMake
+:toc:
+:sectnums:
+
+This repository is done in order to add all the repositories that are related to the CMake playlist coming from YouTube
+
+== Table of content
+
+In this table of content, you'll be redirected to all the repositories I've did to learn the CMake.
+
+Of course this learning curve is going to be the same as the learning curve of the YouTube playlist called "learnqt".
+
+_Using learnqt will let me learn CMake and also Qt in order to create cross-platform GUI application using Qt and QML as well as CMake_
+
+== link:https://github.com/dev-clement/CMake-Ep002[CMake introduction]
+
+This chapter is about making use of CMake in order to create a C++ project and build it and compile for cross-platform purposes.
+
+
+== link:https://github.com/dev-clement/CMake-Ep003[CMake using generators for projects]
+
+The third part of this documentation is about the generators for CMake to compile the project. As you may know, as `CMake` is a tool that you are using on several platform to compile and build your project, you can however, decide to target a specific compiler on a specific platform.
+
+== link:https://github.com/dev-clement/CMake-Ep004[CMake for building and compiling]
+
+In order to run CMake without carying too much about details such as the underlying build syste of your operating system, you can use CMake directly to build and compile your project for the specified target.
+
+== link:https://github.com/dev-clement/CMake-Ep004.git[Build using CMake]
+
+In order to run Cmake without carying too much about details such as the underlying build system. Without making use of the build system of your operating system in order to change the build system depending on the operating system you are running CMake to.
+
+== link:https://github.com/dev-clement/CMake-Ep005.git[Project with several file]
+
+As a C++ program isn't done with only one file, although it's done using sevel files such as headers and source as well as libraries. That means we will have to give it to CMake to build and compile your project.
+
+== link:https://github.com/dev-clement/CMake-Ep006.git[Selecting a compiler]
+
+As CMake isn't a build system, it will generate a build for your specific build system, although you can (using CMake) specify a compiler for your project
+
+== link:https://github.com/dev-clement/CMake-Ep007.git[Cut executable to statics libraries]
+
+Actually, we saw how to create one and only one individual target. Although CMake is used for making Cross-platform build to compile and use your project in several OS (Linux, Windows, Mac), you can also
+
+== link:https://github.com/dev-clement/CMake-Ep008[Scope of the links]
+
+One big advantage of using CMake is that you can set the scope of a dependency in order to not clash with another one
+
+== link:https://github.com/dev-clement/CMake-Ep009.git[Organizing your cmake through scripts]
+
+In this article, we'll see how we can split a `CMakeLists` file into several targets. And break the code into libraries that will be used by other libraries.
+
+== link:https://github.com/dev-clement/CMake-Ep011.git[Commands argument]
+
+Although, as CMake is a tool that let you build your project on a cross-compilation specific way, CMake has some functions you should be aware of, such as:
+
+* Functions
+
+* Macros
+
+* Flow control
+
+* Commands
+
+== link:https://github.com/dev-clement/CMake-Ep012.git[Variables using CMake]
+Using CMake as a script mode let you create variables, for the environment, for the cache or for current scope of the application you are trying to build.
+
+== link:https://github.com/dev-clement/CMake-Ep013.git[CMake list and option]
+We are going to see how can we store multiple values inside of a variables.
+
+== link:https://github.com/dev-clement/CMake-Ep014.git[CMake looping]
+Using CMake, if you want to do things on repititive way, you could be able to use loops.
+
+== link:https://github.com/dev-clement/CMake-Ep015.git[CMake functions]
+Start recording a function for later invocation as a command. Function in cmake are the same as other language (such as C, C++, ...) functions are made to contain a piece of reusable code.
+
+== link:https://github.com/dev-clement/CMake-Ep016.git[CMake macro]
+In CMake, macros a really brother or sisters of functions.
+
+== link:https://github.com/dev-clement/CMake-Ep020.git[CMake custom command]
+This article is about custom targets, custom target is a different target that we've seen before.
+
+== link:https://github.com/dev-clement/CMake-Ep021.git[Handle dependency through CMake]
+Suppose you are writing your application and needs a third party library, well it tend to be tough to do so in C++, there is no tool that let you do it easily.
+
+== link:https://github.com/dev-clement/CMake-Ep020.git[CMake custom target]
+Custom target is a target that isn’t looking like the one there is present on CMake.
+
+== link:https://github.com/dev-clement/CMake-Ep022.git[CMake using Google Test for test purposes]
+In this article, we'll talk about using the `FetchContent` module to fetch, download and use the `Google test` framework that is used to making some test for our C++ application.
+
+== link:https://github.com/dev-clement/CMake-Ep023.git[CMake using Catch2 for test purposes]
+Catch2’s main advantag eis that using it is both simple and natural. Test names do not have to be valid identifiers, assertion looks like normal C++ boolean exoressions, and section provide a nice and local way to share set-up and tear-down code in tests.
+
+== link:https://github.com/dev-clement/CMake-Ep024.git[Test the main function]
+In the last article for using `CMake` with both `GoogleTest` and `Catch2` test, we explore both of the followings libraries, although we can test the project, the `main` function that is linked to the executable of your own isn't
+
+== link:https://github.com/dev-clement/CMake-Ep025.git[Documenting using DoxyGen]
+In this article we'll look at how we can make use of Doxygen in our CMake project and how Doxygen is used in CMake.
+
+== link:https://github.com/dev-clement/CMake-Ep027.git[CMake command to generate doc]
+CMake did bundle all the tough things related to Doxygen, and it is possible to use a built-in command for generating the documentation as we were doing all along.
+
+== link:https://github.com/dev-clement/CMake-Ep029.git[Using VCPKG with CMake]
+vcpkg is a free and open-source C/C++ package manager maintained by Microsoft and the C++ community. It's designed to address the unique pain points with managing C/C++ libraries

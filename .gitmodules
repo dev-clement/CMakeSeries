@@ -1,0 +1,147 @@
+[submodule "CMake-Ep002"]
+	path = CMake-1_What_Is_CMake
+	url = https://github.com/dev-clement/CMake-Ep002.git
+[submodule "CMake-Ep003"]
+	path = CMake-2_What_are_generators
+	url = https://github.com/dev-clement/CMake-Ep003.git
+[submodule "CMake-Ep004"]
+	path = CMake-3_How_to_build_cross-compiled
+	url = https://github.com/dev-clement/CMake-Ep004.git
+[submodule "CMake-Ep005"]
+	path = CMake-4_How_to_use_multi_config_file
+	url = https://github.com/dev-clement/CMake-Ep005.git
+[submodule "CMake-Ep006"]
+	path = CMake-5_How_To_Choose_compiler
+	url = https://github.com/dev-clement/CMake-Ep006.git
+[submodule "CMake-Ep007"]
+	path = CMake-6_How_to_specify_targets
+	url = https://github.com/dev-clement/CMake-Ep007.git
+[submodule "CMake-Ep008"]
+	path = CMake-7_How_to_handle_dependencies_scope
+	url = https://github.com/dev-clement/CMake-Ep008.git
+[submodule "CMake-Ep009"]
+	path = CMake-8_how_to_organize_your_cmake_code
+	url = https://github.com/dev-clement/CMake-Ep009.git
+[submodule "CMake-Ep011"]
+	path = CMake-10_Using_cmake_mode
+	url = https://github.com/dev-clement/CMake-Ep011.git
+[submodule "CMake-Ep010"]
+	path = CMake-9_Split_project
+	url = https://github.com/dev-clement/CMake-Ep010.git
+[submodule "CMake-Ep012"]
+	path = CMake-11_cmake_variables
+	url = https://github.com/dev-clement/CMake-Ep012.git
+[submodule "CMake-Ep013"]
+	path = CMake-12_list_and_option_commands
+	url = https://github.com/dev-clement/CMake-Ep013.git
+[submodule "CMake-Ep014"]
+	path = CMake-13_Using_loops
+	url = https://github.com/dev-clement/CMake-Ep014.git
+[submodule "CMake-Ep015"]
+	path = CMake-13_using_functions
+	url = https://github.com/dev-clement/CMake-Ep015.git
+[submodule "CMake-Ep016"]
+	path = CMake-14_using_macros
+	url = https://github.com/dev-clement/CMake-Ep016.git
+[submodule "CMake-Ep017"]
+	path = CMake-15_Control_flow
+	url = https://github.com/dev-clement/CMake-Ep017.git
+[submodule "CMake-Ep018"]
+	path = CMake-16_using_CMake_variables_in_depth
+	url = https://github.com/dev-clement/CMake-Ep018.git
+[submodule "CMake-Ep020"]
+	path = CMake-17_using_clang_format
+	url = https://github.com/dev-clement/CMake-Ep020.git
+[submodule "CMake-Ep021"]
+	path = CMake-18_cmake_dependency_management
+	url = https://github.com/dev-clement/CMake-Ep021.git
+[submodule "CMake-Ep022"]
+	path = CMake-19_using_google_test
+	url = https://github.com/dev-clement/CMake-Ep022.git
+[submodule "CMake-Ep023"]
+	path = CMake-20_using_catch2
+	url = https://github.com/dev-clement/CMake-Ep023.git
+[submodule "CMake-Ep024"]
+	path = CMake-21_testing_main_function
+	url = https://github.com/dev-clement/CMake-Ep024.git
+[submodule "CMake-Ep025"]
+	path = CMake-22-generating-documentation
+	url	= https://github.com/dev-clement/CMake-Ep025.git
+[submodule "CMake-Ep026"]
+	path = CMake-Ep026
+	url = https://github.com/dev-clement/CMake-Ep026.git
+[submodule "CMake-Ep027"]
+	path = CMake-23_generating_documentation_using_doxygen_and_cmake
+	url = https://github.com/dev-clement/CMake-Ep027.git
+[submodule "CMake-Ep028"]
+	path = CMake-24_dependency_management_through_fetch_content
+	url = https://github.com/dev-clement/CMake-Ep028.git
+[submodule "CMake-Ep029"]
+	path = CMake-25_dependency_management_using_vcpkg
+	url = https://github.com/dev-clement/CMake-Ep029.git
+[submodule "CMake-Ep030"]
+	path = CMake-26_using_cmake_and_wsl
+	url = https://github.com/dev-clement/CMake-Ep030.git
+[submodule "CMake-Ep031"]
+	path = CMake-27_cmake_project_structure
+    url = https://github.com/dev-clement/CMake-Ep031.git
+[submodule "CMake-Ep032"]
+	path = CMake-28_cmake_project_structure
+	url = https://github.com/dev-clement/CMake-Ep032.git
+[submodule "CMake-Ep033"]
+	path = CMake-29_cmake_enable_and_disable_using_options_command
+	url = https://github.com/dev-clement/CMake-Ep033.git
+[submodule "CMake-Ep034"]
+	path = CMake-30_cmake_accessing_value_in_code
+	url = https://github.com/dev-clement/CMake-Ep034.git
+[submodule "CMake-Ep035"]
+	path = CMake-31_specifying_source_and_headers_files
+	url = https://github.com/dev-clement/CMake-Ep035.git
+[submodule "CMake-Ep036"]
+	path = CMake-32_cmake_using_its_CLI
+	url = https://github.com/dev-clement/CMake-Ep036.git
+[submodule "CMake-Ep037"]
+	path = CMake-33_cmake_using_git_submodules
+	url = https://github.com/dev-clement/CMake-Ep037.git
+[submodule "CMake-Ep038"]
+	path = CMake-34_cmake_dependency_graph
+	url = https://github.com/dev-clement/CMake-Ep038.git
+[submodule "CMake-Ep040"]
+	path = CMake-36_using_doxygen
+	url = https://github.com/dev-clement/CMake-Ep040.git
+[submodule "CMake-Ep041"]
+	path = CMake-Ep041
+	url = https://github.com/dev-clement/CMake-Ep041.git
+[submodule "CMake-Ep039"]
+	path = CMake-35_using_FetchContent_API
+	url = https://github.com/dev-clement/CMake-Ep039.git
+[submodule "CMake-Ep042"]
+	path = CMake-Ep042
+	url = https://github.com/dev-clement/CMake-Ep042.git
+[submodule "CMake-Ep043"]
+	path = CMake-Ep043
+	url = https://github.com/dev-clement/CMake-Ep043.git
+[submodule "CMake-Ep044"]
+	path = CMake-Ep044
+	url = https://github.com/dev-clement/CMake-Ep044.git
+[submodule "CMake-Ep046"]
+	path = CMake-Ep046
+	url = https://github.com/dev-clement/CMake-Ep046.git
+[submodule "CMake-Ep045"]
+	path = CMake-Ep045
+	url = https://github.com/dev-clement/CMake-Ep045.git
+[submodule "CMake-Ep048"]
+	path = CMake-Ep048
+	url = https://github.com/dev-clement/CMake-Ep048/tree/main
+[submodule "CMake-Ep047"]
+	path = CMake-Ep047
+	url = https://github.com/dev-clement/CMake-Ep047.git
+[submodule "CMake-Ep049"]
+	path = CMake-Ep049
+	url = https://github.com/dev-clement/CMake-Ep049.git
+[submodule "CMake-Ep050"]
+	path = CMake-Ep050
+	url = https://github.com/dev-clement/CMake-Ep050.git
+[submodule "CMake-34_cmake_dependency_graph"]
+	path = CMake-34_cmake_dependency_graph
+	url = ./CMake-34_cmake_dependency_graph/
