@@ -1,0 +1,305 @@
+# CMake dependency management
+This article is about using Conan as dependency management that is a dependency management system
+
+:toc:
+:sectnums:
+
+== Introduction
+Conan is a dependency and package manager for both C and C++ languages. It is free and open-source, works in all platforms such as:
+=====
+* Linux 
+* MacOS 
+* Windows
+* FreeBSD
+* Solaris
+* etc...
+=====
+Conan can be used to develop for all targets including the embeded ones, such as mobile (iOS, Android), and bare metal. It also integrates with all build systems like:
+=====
+* CMake
+* Visual Studio (MSBuild)
+* Makefiles
+* SCon
+* etc...
+=====
+The list above also include the proprietary systems.
+
+=== Conan portability
+
+Conan works in all operating systems including Windows, Linux and macOS, FreeBSD, and others, and it can target any platforms, including desktop, server, and cross-building for mobile (Android and iOS), as well as embeded and bare metal devices. 
+
+NOTE: It integrates with other tools like Docker, MinGW, WSL and with build systems such as CMake, MSBuild, Makefiles, Meson, SCons. It can even integrate with any proprietary build systems.
+
+=== Conan price
+Conan it has native integration with JFrog Artifactory, including the free Artifactory Community Edition for Conan, enabling developers to host their own private packages on their own server. Conan is deeloped by a full team of full-time maintainers who support many thousands of users, from small to big enterprises, alongside an active and awesome community.
+
+=== Conan binary handling
+Conan can manage any number of different binaries. Not only different binaries but also different build configurations, including different architectures, compilers, compiler versions, runtimes, C++ standard library, etc. When binaries are not available for one configuration they can be built from sources on-demand. Conan can create, upload and download binaries with the same commands and flows on every platform, saving a lot of time in development in continuous integration.
+
+== Install Conan
+Conan can be installed on many operating systems. It has been extensively used and tested on _Windows_, _Linux_ (Several distributions), _macOS_, and is also actively used in _FreeBSD_ and _Solaris_, _SunOS_.
+
+There are also several additional operating systems on which it has been reported to work.
+
+There are several ways to install Conan:
+
+=== Install conan using python
+The preferred and strongly recommended way to install _Conan_ is from PyPi, the Python Package Index using the `pip` command.
+
+To install latest Conan 2 version using the `pip`, you need at least a Python >= 3.6 distribution installed on your machine. Modern python distributions come with pip pre-installed. However, you can install it directly on your system.
+
+==== Install Conan
+Using the Python Package Index command, you can install conan using the following command:
+```bash
+$ pip install conan
+```
+NOTE: Make sure that your pip installation matches your Python and the version is >= 3.6
+
+NOTE: On Linux, you may need sudo permissions to install Conan globally
+
+NOTE: We strongly recommend using virtualenvs (virtualenvwrapper works great) for everything related to Python.
+
+== Using Conan in CMake
+Once Conan package manager has been installed in your system, you can use it with all the systems defined above, right now we'll focus on using Conan with `CMake`
+
+=== Tell CMake using Conan
+First and foremost, you need to tell to CMake to make use of Conan using the following example:
+```cmake
+cmake_minimum_required(VERSION 3.50)
+
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_BINARY_DIR}/conan_toolchain.cmake")
+
+project(Dependencies)
+```
+The most important part of the CMake defined above is the `set` command your you're adding the `conan_toolchain.cmake` to your `CMAKE_TOOLCHAIN_FILE` variable.
+
+Another way of including conan is by using the following command:
+```cmake
+cmake_minimum_required(VERSION 3.50)
+
+project(Dependencies)
+
+include(${CMAKE_BINARY_DIR}/conan_toolchain.cmake)
+```
+
+==== Tell conan about dependencies through a python file
+Using the `conanfile.py` is a python script that lets you load the dependency you need:
+```python
+from conan import ConanFile
+from conan.tools.cmake import CMakeToolChain
+
+class RoosterRecipe(ConanFile):
+    settings = "os", "compiler", "build_type", "arch"
+    generator = "CMakeToolChain", "CMakeDeps"
+    
+    def requirement(self):
+        self.requires("catch2/3.4.0")
+        self.requires("fmt/10.1.1")
+        self.requires("sfml/2.6.1")
+```
+The file described above is what we call a `conanfile` that is a recipe file of a package, responsible for defining how to build it and consume it.
+
+IMPORTANT: conanfile.py recipes use a variety of attributes and methods to operate. In order to avoid collisions and conflicts, you need to follow some rules
+
+===== Conan rules
+* Public attributes and mothods like `build()` and `self.package_folder` are reserved for Conan. Don't use public members for custom fields or methods in the recipes.
+* Use "protected" access for your own members, like `self._my_data` or `def _my_helper(self):`.
+* Conan only reserves "protected" members stating with `_conan`.
+
+== Conan files
+In order to specify to Conan to fetch the needed dependencies, you can do it in two ways:
+
+=== Using conanfile.txt
+A file named _conanfile.txt_ can be used to fetch the needed dependencies like so:
+
+```cmake
+[requires]
+<dependency>/<version>
+
+[generators]
+<generators>...
+```
+
+As you can see, we see that there is 2 sections in this file like:
+
+* The [requires] section is where you declare the libraries you want to use in the project, for instance any package that is available in the _ConanCenter_ repository
+* The [generators] section tells _Conan_ to generate the files that the compilers or build systems will use to find the needed dependencies and build the project accordingly. In this case, as our project is based to CMake, we'll make use of _CMakeDeps_ in order to generate informations about where the dependencies libraries files are installed and we'll use _CMakeToolChain_ to pass build information to CMake using a CMake toolchain file.
+
+=== Using a conan profile
+Besides the _conanfile.txt_ explain above, we need a *Conan profile* to build our project. Conan profiles allow users to define a configuration set for things like the compiler, build configuration, architecture, shared or static libraries and so on... Conan by default will not try to detect a profile automatically, so we need to create one.
+
+In order to let Conan try to guess the profile, based on the current operating system and installed tools, you can run the following command:
+```bash
+$ conan profile detect --force
+```
+This command will detect the operating system, build architecture and compiler settings based on the environment. It will also set the build configuration as Release by default. The generated profile will be stored in the Conan home folder with name _default_ as will be used by Conan in all commands by default, unless another profile is specified via the CLI. An example of the output of the command through Windows would be:
+```bash
+$ conan profile detect --force
+detect_api: Found msvc 17
+
+Detected profile:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=msvc
+compiler.cppstd=14
+compiler.runtime=dynamic
+compiler.version=194
+os=Windows
+```
+NOTE: Conan will always set the default C++ standard as the one that the detected compiler version uses by default, except for the case of macOS using apple-clang. In this case, for apple-clang>=11, it sets `compiler.cppstd=gnu17`. If you want to use a different C++ standard, you can edit the default profile directly. First, get the location of the default profile using the following command:
+```bash
+$ conan profile path default
+C:\Users\<username>\.conan2\profiles\default
+```
+NOTE: Then open and edit file an set `compiler.cppstd` to the C++ standard you want to use.
+
+NOTE: If you want to change a Conan profile to use a compiler different from the default one, you need to change the `compiler` setting and also tell Conan explicitly where to find it using the *tools.build:compiler_executables configuration.*
+
+=== Conan dependencies management
+
+We'll use Conan to install the dependency you wrote in your _conanfile.txt_ file, and generate the files that CMake needs, to find this library and build our project. We'll generate those files in the folder build. In order to do that, run:
+
+```bash
+$ conan install . --output-folder=build --build=missing
+```
+As you can see in the output, there are a couple of things going on:
+
+* Conan installed the package library from the remote server, which should be the Conan Center server by default, if the library is available. This server stores both the Conan recipes, which are the files that define how libraries must be built, and the binaries that can be reused so we don't have to build from sources every time.
+* Conan generate several files under the _build_ folder. Those files were generated by both the _CMakeToolchain_ and _CMakeDeps_ generators we set in the *conanfile.txt*. _CMakeDeps_ generates files so that CMake finds the dependency library we have just downloaded. On the other side, _CMakeToolchain_ generates a toolchain file for CMake so that we can transparently build our project with CMake using the same settings that we detected for our default profile.
+
+Now we can build the project this way:
+```bash
+$ cd build
+# Assuming Visual Studio 17 2022 is your VS version you have
+$ cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake"
+$ cmake --build . --config Release
+```
+NOTE: CMakeToolchain might have generate CMake *presets* files, that allows users with a modern CMake (`>=3.23`) to use them with `cmake --preset` instead of passing the toolchain file argument.
+
+== Using build tools as conan package
+Right now, we are using CMake in a system-wide operating-system, and we don't really carring too much about the version. But what if the CMake version of where you want to build the system is down the version you need to install your project as well as your dependencies...
+
+Fortunately, Conan is smart enough to handle this kind of situation, thanks to _conanfile.txt_ configuration file, you can add a `tool_requires` section and then specifies the system we want to use for building the application like so:
+
+```txt
+[requires]
+<dependency>/<version>
+
+[tool_requires]
+cmake/4.0.3
+
+[generators]
+CMakeDeps
+CMakeToolchain
+```
+
+IMPORTANT: Please note that this _conanfile.txt_ will install the dependency and cmake/4.1.0-rc1 separately. However, if Conan does not find a binary for the dependency in the Conan Center and needs to be built from sources, a CMake installation must already be present on your system, because the `cmake/4.1.0-rc1` declared in your _conanfile.txt_ only applies to your current project, not all dependencies. If you want to use that _cmake/4.1.0-rc1_ to also build the dependency, when installing if necessary, you may add the `[tool_requires]` section to the profile you are using.
+
+Also, add a message to the `CMakeLists.txt` to output the CMake version:
+
+NOTE: Now, If you check the folder, you'll see that Conan generated a new file called _conanbuilt.sh_ or _conanbuilt.bat_. This is the result of automatically invoking _VirtualBuildEnv_ generator when we declared the `tool_requires` in the _conanfile.txt_. This file sets some environment variables like a new `PATH` that we can use to inject the location of the _tool_requires_ into our environment.
+
+IMPORTANT: In order to continue with the binary defined in the `tool_requires` section of your _conanfile_ file, you have to activate your environment:
+
+```bash
+$ cd build
+$ conanbuilt.<bat/sh/ps1>
+```
+
+If you run the above commands, and then try to look at the `cmake` version, you'll see something like this:
+
+```bash
+# If you take the conan.txt file describe above
+$ cmake --version
+cmake version 4.0.3
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+```
+
+NOTE: As you can see, after activating the environment, the Make version became version 3.27.9 because the CMake binary has been added to the path and is the currently active version now. Now you can build your project as your previously did, but this time, Conan will use CMake version 4.0.3 to build it.
+
+```bash
+$ cmake .. -G "Visual Studio 17 2022" -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
+$ cmake --build . --config <Release/Debug>
+```
+
+NOTE: When we activated the environment, a new file named `deactivate_conanbuild.sh/bat` was created in the same folder. If you source this file, you'll be able to restore the environment as it was before.
+
+```bash
+$ deactivate_conanbuilt.sh/bat
+```
+
+IMPORTANT: The `tool_requires` section in your _conanfile.txt_ and tool packages are intended for executables applications, such as `cmake` or `ninja`. Don't use `tool_requires` to depend on library or library-like dependencies.
+
+NOTE: Right now, using Conan, we saw that you were able to build for a specific configuration such as *Release* or *Debug*, of course, we can do better than that.
+
+=== Building for several configurations
+So far, we built a simple  CMake project that depended on the dependency and learned about `tool_requires`, a special type of `requirements` for build-tools like CMake. In both casesn we did not specify anywhere that we canted to build the application in either _Release_ or _Debug_ mode, or if we wanted to linkg against _static_ or even _shared_ libraries. That is because Conan, if not instructed otherwise, sill use a default configuration declared in the _default profile_. This default profile was created in the first example when we run the `conan profile detect` command.
+
+After the `conan profile detect`, conan stores this file in the */profiles* folder, located in the Conan user home. You can check the contents of your default profile by running the `conan config home` command in order to get the location of the Conan user home and then showing the contents of the default profile in the */profiles* folder:
+
+```bash
+$ conan config home
+<path_to_conan_profiles>
+```
+
+After the path, you can check the content of the profile by doing:
+
+```bash
+$ cat <path_to_conan_profile>
+```
+As you can see, the profile has different sections. The `[settings]` section is the one that has information about things like the operating system, architecture, conpiler and build configuration.
+
+NOTE: When you cann a Conan command setting the `--profile` argument, Conan will take the information regarding the profile and apply it to the packages you want to build or install. If you don't specify that argument it's equivalent to call it with `--profile=default`. These two commands will behave the same.
+```bash
+$ conan install . --build=missing
+$ conan install . --build=missing --profile=default
+```
+You can store different pforiles and use them to build for different settings. For instance, to use a `build_type=debug`, or adding a `tool_requires` to all the packages you build with that profile. We will create a debug profile to try building with different configurations:
+
+```bash
+[settings]
+os=Macos
+arch=x86_64
+compiler=apple-clang
+compiler.version=14.0
+compiler.libcxx=libc++
+compiler.cppstd=gnu11
+build_type=Debug
+```
+=== Modifying settings: use Debug configuration for the application and its dependencies
+
+Using profiles is not the only way to set the configuration you wanna use. You can also override the profile settings in the Conan command using the `--settings` argument.
+
+For instance, you can build the project from the previous examples in _Debug_ configuration instead of _Release_.
+
+NOTE: Before building, please check that we modified the source code in the `use_fmt.cpp` file by adding a check of whether we are in debug or release.
+
+```cpp
+int main() {
+    #ifdef NDEBUG
+        fmt::print("Hello in Debug mode");
+    #else
+        fmt::print("Hello, {}\n", "World");
+    #endif
+    return EXIT_SUCCESS;
+}
+```
+
+NOTE: Now that we modify our main file of the component `use_fmt.cpp`, we build our project using the Debug configuration
+
+```bash
+$ conan install . --output-folder=build --build=missing --settings=build_type=Debug
+```
+
+NOTE: As we explained, this is the equivalent of having debug profile and running these command using the `--profile=debug` argument instead of the `--settings=build_type=Debug` argument.
+
+IMPORTANT: This `conan install` command will check if we already have the required libraries in the local cache for Debug configuration and obtain them if not. It will also update the build configuration in the `conan_toolchain.cmake` as well as `CMakePresets.json` files, that the `CMakeToolchain` generator creates so that when we build the application it's built in _Debug_ configuration. Now build your project as you did in the previous examples and check in the output how it was built in _Debug_ configuration
+
+```cmake
+$ cd build
+$ cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug
+```
+
+IMPORTANT: *_By running the above command in Powershell, it seems like the `.` character is escaped, so in order to avoid that kind of situation, I finished by using the command prompt instead !_*
