@@ -1,0 +1,35 @@
+# CMakeSeries
+Cross platform C++ Development using CMake
+:toc:
+:sectnums:
+
+This repository is done in order to add all the repositories that are related to the CMake playlist coming from YouTube
+
+## Table of content
+
+In this table of content, you'll be redirected to all the repositories I've did to learn the CMake.
+
+Of course this learning curve is going to be the same as the learning curve of the YouTube playlist called "learnqt".
+
+_Using learnqt will let me learn CMake and also Qt in order to create cross-platform GUI application using Qt and QML as well as CMake_
+
+=== link:https://github.com/dev-clement/CMake-Ep002[CMake introduction]
+
+This chapter is about making use of CMake in order to create a C++ project and build it and compile for cross-platform purposes.
+
+
+=== link:https://github.com/dev-clement/CMake-Ep003[CMake using generators for projects]
+
+The third part of this documentation is about the generators for CMake to compile the project. As you may know, as `CMake` is a tool that you are using on several platform to compile and build your project, you can however, decide to target a specific compiler on a specific platform.
+
+=== link:https://github.com/dev-clement/CMake-Ep004[CMake for building and compiling]
+
+In order to run CMake without carying too much about details such as the underlying build syste of your operating system, you can use CMake directly to build and compile your project for the specified target.
+
+=== link:https://github.com/dev-clement/CMake-Ep004.git[Build using CMake]
+
+In order to run Cmake without carying too much about details such as the underlying build system. Without making use of the build system of your operating system in order to change the build system depending on the operating system you are running CMake to.
+
+=== link:https://github.com/dev-clement/CMake-Ep005.git[Project with several file]
+
+As a C++ program isn't done with only one file, although it's done using sevel files such as headers and source as well as libraries. That means we will have to give it to CMake to build and compile your project.
